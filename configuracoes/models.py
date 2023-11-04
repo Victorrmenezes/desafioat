@@ -7,6 +7,7 @@ class Users(models.Model):
     email = models.EmailField()
     cpf = models.CharField(max_length=11)
     birth_date = models.DateField()
+    password = models.CharField(max_length=255)
 
 class Assets(models.Model):
     code = models.CharField(max_length=5)
@@ -18,3 +19,4 @@ class UserAssets(models.Model):
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
     low_tunnel = models.DecimalField(max_digits=6, decimal_places=2,null=True)
     top_tunnel = models.DecimalField(max_digits=6, decimal_places=2,null=True)  
+    refresh_time = models.IntegerField()

@@ -4,7 +4,7 @@
         <h3>Seus ativos selecionados</h3>
         {%for asset in assets%}
 
-        <form method="delete" action ="{% url 'list' %}">
+        <form method="post" action ="{% url 'list' %}">
             <li>{{asset.code}} - {{asset.name}} - {{asset.industry}}</li>
             <input type = 'submit' value="Deletar"></input>
             {% csrf_token %}
@@ -13,7 +13,7 @@
         {%endfor%}
         {%for detail in details%}
 
-        {{detail.lower_tunnel}} - {{detail.top_tunnel}}
+        {{detail.low_tunnel}} - {{detail.top_tunnel}}
 
         {%endfor%}
 
@@ -21,6 +21,7 @@
             <input type="int"  name="id" >ID</input>
             <input type="int"  name="low_tunnel" >Low Tunnel</input>
             <input type="int"  name="top_tunnel" >Top Tunnel</input>
+            <input type="int"  name="refresh_time" >Refresh Time</input>
         <input type = 'submit'></input>
             {% csrf_token %}
         </form>
