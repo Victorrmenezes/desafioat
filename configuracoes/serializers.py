@@ -1,20 +1,20 @@
 from rest_framework import serializers
-from .models import Ativo, Usuario, UsuarioAtivo
+from .models import Assets,Users,UserAssets
 
 
-class UsuarioSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model= Usuario
-        fields = ['id','nome','email']
+        model= Users
+        fields = ['id','f_name','email']
 
 
-class AtivoSerializer(serializers.ModelSerializer):
+class AssetSerializer(serializers.ModelSerializer):
     class Meta:
-        model= Ativo
-        fields = ['id','sigla','nome','industria']
+        model= Assets
+        fields = ['id','code','name','industry']
 
-class UsuarioAtivoSerializer(serializers.ModelSerializer):
+class UserAssetSerializer(serializers.ModelSerializer):
     class Meta:
-        model= UsuarioAtivo
-        fields = ['ativo','usuario']
+        model= UserAssets
+        fields = ['asset','user','low_tunnel','top_tunnel']
 

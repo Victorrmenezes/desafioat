@@ -1,11 +1,11 @@
 <html>
     <body>
-        <h1>Bem vindo, {{nome}}</h1>
+        <h1>Bem vindo, {{name}}</h1>
         <h3>Seus ativos selecionados</h3>
-        {%for ativo in ativos%}
+        {%for asset in assets%}
 
-        <form method="delete" action ="{% url 'config' %}">
-            <li>{{ativo.sigla}} - {{ativo.nome}} - {{ativo.industria}} - </li>
+        <form method="delete" action ="{% url 'list' %}">
+            <li>{{asset.code}} - {{asset.name}} - {{asset.industry}}</li>
             <input type = 'submit' value="Deletar"></input>
             {% csrf_token %}
         </form>
@@ -17,14 +17,16 @@
 
         {%endfor%}
 
-        <form method="post" action="{% url 'config/' %}">
-            <input type="int"  name="id" ></input>
+        <form method="post" action="{% url 'add' %}">
+            <input type="int"  name="id" >ID</input>
+            <input type="int"  name="low_tunnel" >Low Tunnel</input>
+            <input type="int"  name="top_tunnel" >Top Tunnel</input>
         <input type = 'submit'></input>
             {% csrf_token %}
         </form>
         <h3>Outros ativos</h3>
-        {%for escolha in escolhas%}
-        <li>{{escolha.id}} - {{escolha.sigla}}</li>
+        {%for choice in choices%}
+        <li>{{choice.id}} - {{choice.code}}</li>
         {%endfor%}
     </body>
 </html>
