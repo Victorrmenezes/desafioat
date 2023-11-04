@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <h1>Bem vindo, {{nome}}</h1>
+        <h3>Seus ativos selecionados</h3>
+        {%for ativo in ativos%}
+
+        <form method="delete" action ="{% url 'config' %}">
+            <li>{{ativo.sigla}} - {{ativo.nome}} - {{ativo.industria}} - </li>
+            <input type = 'submit' value="Deletar"></input>
+            {% csrf_token %}
+        </form>
+        
+        {%endfor%}
+        {%for detail in details%}
+
+        {{detail.lower_tunnel}} - {{detail.top_tunnel}}
+
+        {%endfor%}
+
+        <form method="post" action="{% url 'config/' %}">
+            <input type="int"  name="id" ></input>
+        <input type = 'submit'></input>
+            {% csrf_token %}
+        </form>
+        <h3>Outros ativos</h3>
+        {%for escolha in escolhas%}
+        <li>{{escolha.id}} - {{escolha.sigla}}</li>
+        {%endfor%}
+    </body>
+</html>
