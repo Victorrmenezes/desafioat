@@ -5,19 +5,12 @@ from rest_framework.response import Response
 from .models import Users, Assets, UserAssets
 from .serializers import AssetSerializer, UserSerializer, UserAssetSerializer
 
-
+@api_view(['GET'])
 def list_assets(request):
 
     # SEARCH FOR THE CURRENT USER_ID
     query_user = Users.objects.all()[0]
-    user = UserSerializer(query_user)
-    
-    if request.method == 'GET':
-        pass
-
-    elif request.method == 'POST':
-        pass
-        
+    user = UserSerializer(query_user) 
     
 
     query_ativo = Assets.objects.prefetch_related('userassets_set').filter(userassets__user_id=user.data['id'])
@@ -28,8 +21,9 @@ def list_assets(request):
 
     query_choices= Assets.objects.all()
     choices = AssetSerializer(query_choices, many = True)
-    return render(request, "config.html", {"name": user.data['f_name'] ,'assets':assets.data, 'choices':choices.data, 'details':userassset.data})
+    return Response(choices.data)
 
+@api_view(['POST'])
 def add_asset(request):
     if request.method == 'POST':
         data_asset = {
@@ -43,7 +37,6 @@ def add_asset(request):
         serializer = UserAssetSerializer(data=data_asset)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        list_assets(request)
         return redirect('list')
     else:
         return redirect('list')

@@ -5,7 +5,7 @@ function Table() {
     const [reversedData, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`${backendUrl}/store/products/`, {})
+        fetch(`${backendUrl}/manager/manager/`, {})
           .then((response) => response.json())
           .then((data) => {
             if (Array.isArray(data)) {
@@ -23,6 +23,7 @@ function Table() {
       return(
         <div  style={{maxHeight: '400px',overflowY:'scroll'}}>
             <h2>Tabela</h2>
+
             {reversedData.map( (row)=>(
                 <li key = {row.id}>{row.id}</li>
 
