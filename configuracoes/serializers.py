@@ -19,3 +19,8 @@ class UserAssetSerializer(serializers.ModelSerializer):
         fields = ['asset','user','low_tunnel','top_tunnel','refresh_time']
     
     asset = AssetSerializer()
+
+class SaveUserAssetSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= UserAssets
+        fields = ['asset','user','low_tunnel','top_tunnel','refresh_time']
