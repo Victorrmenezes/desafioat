@@ -26,21 +26,21 @@ def market_assets(request):
 @api_view(['POST'])
 def add_asset(request):
     if request.method == 'POST':
-        data_asset = {
-            'asset':int(request.POST.get('asset',0)),
-            'user':1,
-            'low_tunnel':float(request.POST.get('low_tunnel',0)),
-            'top_tunnel':float(request.POST.get('top_tunnel',0)),
-            'refresh_time':int(request.POST.get('refresh_time',5))
-            }
+        # data_asset = {
+        #     'asset':int(request.POST.get('asset',0)),
+        #     'user':1,
+        #     'low_tunnel':float(request.POST.get('lowTunnel',0)),
+        #     'top_tunnel':float(request.POST.get('topTunnel',0)),
+        #     'refresh_time':int(request.POST.get('refreshTime',5))
+            # }
         # data_asset = request.data.copy()
-        print(data_asset)
-        serializer = SaveUserAssetSerializer(data=data_asset)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response("OK")
+        print(request.body)
+        # serializer = SaveUserAssetSerializer(data=data_asset)
+        # serializer.is_valid(raise_exception=True)
+        # serializer.save()
+        return HttpResponse(status.HTTP_201_CREATED)
     else:
-        return Response("N OK")
+        return HttpResponse(status.HTTP_400_BAD_REQUEST)
 
 def login(request):
     if request.method == 'GET':

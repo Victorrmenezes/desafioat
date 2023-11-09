@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import backendUrl from "../Config";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import MyTable from "./my_table";
 
 function AssetDetail() {
     const [reversedData, setData] = useState([]);
 
-    useEffect(() => {
-        fetch(`${backendUrl}/manager/manager/`, {})
+    useEffect((id) => {
+        fetch(`${backendUrl}/manager/manager/${id}`, {})
           .then((response) => response.json())
           .then((data) => {
             if (Array.isArray(data)) {
@@ -23,8 +24,12 @@ function AssetDetail() {
       }, []);
 
       return(
-        <div  style={{maxHeight: '400px', width: '700px'}}>
+        <div  style={{maxHeight: '400px', width: '1200px'}}>
             <Link to={`/homepage`}>Voltar</Link>
+            <h1></h1>
+
+            <MyTable/>
+
             {/* <table className="table" width='15px'>
                     <thead>
                         <tr>
