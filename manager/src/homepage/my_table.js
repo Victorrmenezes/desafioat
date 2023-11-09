@@ -14,6 +14,15 @@ class MyTable extends Component {
         console.log({myAssets})
     };
 
+     handleDelete = async myAsset => {
+        await axios.delete(`${backendUrl}/manager/delete/${myAsset.id}`);
+        console.log(myAsset)
+        const myAssets =this.state.myAssets.filter(a => a.id !== myAsset.id);
+
+        this.setState({myAssets})
+
+    }
+
     render() { 
         return (
             <div>
@@ -30,7 +39,7 @@ class MyTable extends Component {
                           </tr>
                       </thead>
                       <tbody>
-                {this.state.myAssets.map( (row) =>(
+                {this.state.myAssets.map( row =>(
                     <tr key = {row.id}>
                         <td>{row.asset.code}</td>
                         <td>{row.asset.name}</td>
@@ -38,7 +47,7 @@ class MyTable extends Component {
                         <td>{row.top_tunnel}</td>
                         <td>{row.refresh_time}</td>
                         <td><Link to={`/detail/${row.id}`}><button>Detalhes</button></Link></td>
-                        <td><button>Excluir</button></td>
+                        <td><button onClick={() => this.handleDelete(row)}>Excluir</button></td>
                     </tr>
 
                 ) )}

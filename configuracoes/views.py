@@ -58,8 +58,8 @@ def login(request):
 @csrf_exempt
 def delete_asset(request,id):
     try:
-        order = UserAssets.objects.filter(id=id)
-        order.delete()
-        return Response({"message": "Order deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+        asset = UserAssets.objects.filter(id=id)
+        asset.delete()
+        return Response({"message": "Asset deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
     except UserAssets.DoesNotExist:
-        return Response({"error": "Order not found."}, status=status.HTTP_404_NOT_FOUND)
+        return Response({"error": "Asset not found."}, status=status.HTTP_404_NOT_FOUND)
