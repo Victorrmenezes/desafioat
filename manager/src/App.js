@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AssetDetail from './homepage/asset_detail';
 import HomePage from './homepage/homepage';
 import NavBar from './components/navBar';
+import MarketTable from './marketpage/marketTable';
 
 function App() {
     return (
@@ -12,7 +13,7 @@ function App() {
         <Routes>
           <Route exact path='/homepage' element={<HomePage/>}/>
           <Route path='/detail/*' element={<AssetDetail/>}/>
-          <Route path='/market' element={<AssetDetail/>}/>
+          <Route path='/market' element={<MarketTable/>}/>
         </Routes>
       </BrowserRouter>
     );

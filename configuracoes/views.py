@@ -32,15 +32,15 @@ def add_asset(request):
         #     'low_tunnel':float(request.POST.get('lowTunnel',0)),
         #     'top_tunnel':float(request.POST.get('topTunnel',0)),
         #     'refresh_time':int(request.POST.get('refreshTime',5))
-            # }
+        #     }
         # data_asset = request.data.copy()
-        print(request.body)
-        # serializer = SaveUserAssetSerializer(data=data_asset)
-        # serializer.is_valid(raise_exception=True)
-        # serializer.save()
-        return HttpResponse(status.HTTP_201_CREATED)
+        print(request.data)
+        serializer = SaveUserAssetSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data,status=status.HTTP_201_CREATED)
     else:
-        return HttpResponse(status.HTTP_400_BAD_REQUEST)
+        return Response(status.HTTP_400_BAD_REQUEST)
 
 def login(request):
     if request.method == 'GET':

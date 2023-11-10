@@ -11,12 +11,10 @@ class MyTable extends Component {
     async componentDidMount() {
         const {data: myAssets} = await axios.get(`${backendUrl}/manager/manager/`);
         this.setState({myAssets})
-        console.log({myAssets})
     };
 
      handleDelete = async myAsset => {
         await axios.delete(`${backendUrl}/manager/delete/${myAsset.id}`);
-        console.log(myAsset)
         const myAssets =this.state.myAssets.filter(a => a.id !== myAsset.id);
 
         this.setState({myAssets})
