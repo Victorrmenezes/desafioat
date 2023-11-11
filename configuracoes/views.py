@@ -6,6 +6,10 @@ from rest_framework import status
 from django.views.decorators.csrf import csrf_exempt
 from .models import Users, Assets, UserAssets
 from .serializers import AssetSerializer, UserSerializer, UserAssetSerializer, SaveUserAssetSerializer
+from alpha_vantage.timeseries import TimeSeries
+
+API_KEY='2LJGVYXM980N4VLE'
+ts = TimeSeries(key=API_KEY)
 
 @api_view(['GET'])
 def list_assets(request):
@@ -20,21 +24,19 @@ def market_assets(request):
 
     query = Assets.objects.exclude(userassets__user_id=1)
     asset = AssetSerializer(query, many = True)
-    
     return Response(asset.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def asset_details(request,id):
+
+    query = UserAssets.objects.filter(id=id).select_related('asset')
+    userasset = UserAssetSerializer(query, many = True)
+    
+    return Response(userasset.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 def add_asset(request):
     if request.method == 'POST':
-        # data_asset = {
-        #     'asset':int(request.POST.get('asset',0)),
-        #     'user':1,
-        #     'low_tunnel':float(request.POST.get('lowTunnel',0)),
-        #     'top_tunnel':float(request.POST.get('topTunnel',0)),
-        #     'refresh_time':int(request.POST.get('refreshTime',5))
-        #     }
-        # data_asset = request.data.copy()
-        print(request.data)
         serializer = SaveUserAssetSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()

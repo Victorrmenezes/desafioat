@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
 class AssetSerializer(serializers.ModelSerializer):
     class Meta:
         model= Assets
-        fields = ['id','code','name','industry']
+        fields = ['id','code','name']
 
 class UserAssetSerializer(serializers.ModelSerializer):
     class Meta:

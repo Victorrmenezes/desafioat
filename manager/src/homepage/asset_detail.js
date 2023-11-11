@@ -1,70 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { Component,useEffect, useState } from "react";
 import backendUrl from "../Config";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import MyTable from "./my_table";
 
-function AssetDetail() {
-    const [reversedData, setData] = useState([]);
+class AssetDetail extends Component {
+  state = { 
+      details: []
+   };
 
-    useEffect((id) => {
-        fetch(`${backendUrl}/manager/manager/${id}`, {})
-          .then((response) => response.json())
-          .then((data) => {
-            if (Array.isArray(data)) {
-              // Verify that data is an array
-              setData(data.reverse()); // Populate the state variable with fetched data
-            } else {
-              console.error("Data is not an array:", data);
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching orders:", error);
-          });
-      }, []);
+  //  handleAdd = async asset => {
+  //      asset.user = 1;
+  //      asset.asset = asset.id;
+  //      console.log(asset);
+  //      await axios.post(`${backendUrl}/manager/add/`,asset);
+       
+  //     const marketAssets =this.state.marketAssets.filter(a => a.id !== asset.id);
+       
+  //      this.setState({marketAssets})
+  //  }
 
-      return(
-        <div  style={{maxHeight: '400px', width: '1200px'}}>
-            <Link to={`/homepage`}>Voltar</Link>
-            <h1></h1>
+  async componentDidMount(id) {
+      const {data: details} = await axios.get(`${backendUrl}/manager/detail/${60}`);
+      this.setState({details})
+      console.log(details)
+  };
 
-            <MyTable/>
-
-            {/* <table className="table" width='15px'>
-                    <thead>
-                        <tr>
-                            <th>Símbolo</th>
-                            <th>Nome</th>
-                            <th>Low Tunnel</th>
-                            <th>Top Tunnel</th>
-                            <th>Monitoramento (min)</th>
-                            <th>Detalhes</th>
-                            <th>Excluir</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      {reversedData.map( (row) => (
-                        <tr >
-                            <td key={row.id}>{row.asset.code}</td>
-                            <td key={row.id}>{row.asset.name}</td>
-                            <td key={row.id}>{row.low_tunnel}</td>
-                            <td key={row.id}>{row.top_tunnel}</td>
-                            <td key={row.id}>{row.refresh_time}</td>
-                            <td key={row.id}><button className='btn btn-primary btn-sm'>
-                            <Link to={`/detail/${row.id}`} style={{color:'white'}}>
-                              Editar
-                            </Link>
-                              </button></td>
-                            
-                            <td key={row.id}><button onClick={ () => handleDelete(row.id)} className='btn btn-secondary btn-sm'>Excluir</button></td>
-                        </tr>
-                      ))}
-                        
-                    </tbody>
-                </table> */}
-
-        </div>
-      )
-};
+  render() { 
+      return (
+          <div>
+              {this.state.details.map( row =>(
+                  <div>
+                    {row.asset.code}
+                  </div>
+              ) )}
+          </div>
+      );
+  }
+}
 
 export default AssetDetail;

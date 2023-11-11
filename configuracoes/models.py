@@ -10,9 +10,8 @@ class Users(models.Model):
     password = models.CharField(max_length=255)
 
 class Assets(models.Model):
-    code = models.CharField(max_length=5)
+    code = models.CharField(max_length=10)
     name = models.CharField(max_length=255)
-    industry = models. CharField(max_length=255)
 
 class UserAssets(models.Model):
     asset = models.ForeignKey(Assets, on_delete=models.CASCADE)

@@ -32,11 +32,10 @@ class MarketTable extends Component {
                           <tr>
                               <th>Símbolo</th>
                               <th>Nome</th>
-                              <th>Industria</th>
                               <th>Low Tunnel</th>
                               <th>Top Tunnel</th>
                               <th>Monitoramento (min)</th>
-                              <th>Add</th>
+                              <th>Adicionar</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -44,9 +43,8 @@ class MarketTable extends Component {
                     <tr key = {row.id}>
                         <td>{row.code}</td>
                         <td>{row.name}</td>
-                        <td>{row.industry}</td>
-                        <td><input type='number' onChange={(e) => row.low_tunnel=parseInt(e.target.value)}></input></td>
-                        <td><input type='number' onChange={(e) => row.top_tunnel=parseInt(e.target.value)}></input></td>
+                        <td><input type='number' onChange={(e) => row.low_tunnel=parseFloat(e.target.value)}></input></td>
+                        <td><input type='number' onChange={(e) => row.top_tunnel=parseFloat(e.target.value)}></input></td>
                         <td><input type='number' onChange={(e) => row.refresh_time=parseInt(e.target.value)}></input></td>
                         <td><button onClick={() => {this.handleAdd(row)}}>Adicionar</button></td>
                     </tr>
