@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Assets,Users,UserAssets
+from .models import Assets,Users,UserAssets, AssetPrices
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -24,3 +24,8 @@ class SaveUserAssetSerializer(serializers.ModelSerializer):
     class Meta:
         model= UserAssets
         fields = ['asset','user','low_tunnel','top_tunnel','refresh_time']
+
+class AssetPriceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssetPrices
+        fields = ['id','asset_id','price']

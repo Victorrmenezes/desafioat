@@ -21,7 +21,7 @@ class UserAssets(models.Model):
     refresh_time = models.IntegerField()
 
 class AssetPrices(models.Model):
-    asset = models.ForeignKey(Assets, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=6,decimal_places=2)
+    asset_id = models.ForeignKey(Assets, on_delete=models.CASCADE)
+    price = models.DecimalField(max_digits=10,decimal_places=6)
     created_at = models.DateTimeField(auto_now_add=True)
     
