@@ -11,6 +11,8 @@ djangorestframework = "*"
 django-cors-headers = "*"
 alpha-vantage = "*"
 pandas = "*"
+apscheduler = "*"
+yahooquery = "*"
 
 [dev-packages]
 

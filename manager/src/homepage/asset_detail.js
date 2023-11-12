@@ -1,8 +1,8 @@
 import React, { Component,useEffect, useState } from "react";
 import backendUrl from "../Config";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import MyTable from "./my_table";
+import { useParams } from "react-router-dom";
+
 
 class AssetDetail extends Component {
   state = { 
@@ -19,11 +19,14 @@ class AssetDetail extends Component {
        
   //      this.setState({marketAssets})
   //  }
+  
+  async componentDidMount() {
 
-  async componentDidMount(id) {
-      const {data: details} = await axios.get(`${backendUrl}/manager/detail/${60}`);
-      this.setState({details})
-      console.log(details)
+    // const id = this.props.match.params.id;
+    const id=70;
+    const {data: details} = await axios.get(`${backendUrl}/manager/detail/${id}`);
+    this.setState({details})
+    console.log(details)
   };
 
   render() { 

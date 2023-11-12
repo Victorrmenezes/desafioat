@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from .scheduler import start
 urlpatterns = [
     path("manager/", views.list_assets, name='list'),
     path("detail/<int:id>", views.asset_details, name='list'),
@@ -9,3 +9,6 @@ urlpatterns = [
     path("add/", views.add_asset, name='add'),
     path("login/", views.login, name = 'login'),
 ]
+
+
+start()

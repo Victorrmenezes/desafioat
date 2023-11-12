@@ -7,7 +7,6 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Users, Assets, UserAssets
 from .serializers import AssetSerializer, UserSerializer, UserAssetSerializer, SaveUserAssetSerializer
 from alpha_vantage.timeseries import TimeSeries
-
 API_KEY='2LJGVYXM980N4VLE'
 ts = TimeSeries(key=API_KEY)
 
@@ -31,6 +30,7 @@ def asset_details(request,id):
 
     query = UserAssets.objects.filter(id=id).select_related('asset')
     userasset = UserAssetSerializer(query, many = True)
+    print(userasset.data)
     
     return Response(userasset.data, status=status.HTTP_200_OK)
 
