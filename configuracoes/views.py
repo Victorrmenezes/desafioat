@@ -1,7 +1,5 @@
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render,redirect, get_object_or_404
-from django.http import HttpResponse
-from django.db.models import F
+from django.shortcuts import render,redirect
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -46,17 +44,6 @@ def add_asset(request):
     else:
         return Response(status.HTTP_400_BAD_REQUEST)
 
-def login(request):
-    if request.method == 'GET':
-        return render(request,'login.html')
-    elif request.method == 'POST':
-        user_email = request.POST.get('email',None)
-        user_password = request.POST.get('password',None)
-
-        query_user = Users.objects.filter(email=user_email)
-        user = AssetPriceSerializer(query_user)
-        print(user.data)
-        return redirect('login')
 
 @api_view(['DELETE'])
 @csrf_exempt

@@ -25,16 +25,11 @@ function AssetDetail(){
       })
   }, [userAssetId]);
 
-  const handleTap = () => {
-    console.log(detail.data[0].created_at)
-  }
-
   return(
     <div>
       <div style={{display:"flex"}}>
         
         <h3 style={{margin:'15px'}}>{ assetCode} - {assetName}</h3>
-        {/* <button onClick={ () => handleTap()} >Tap</button> */}
       </div>
       <table className="table table-striped">
         <thead >

@@ -13,6 +13,8 @@ alpha-vantage = "*"
 pandas = "*"
 apscheduler = "*"
 yahooquery = "*"
+djoser = "*"
+djangorestframework-simplejwt = "*"
 
 [dev-packages]
 
