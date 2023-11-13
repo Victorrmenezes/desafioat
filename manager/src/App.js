@@ -10,11 +10,13 @@ function App() {
     return (
       <BrowserRouter>
       <NavBar/>
+      <div style={{padding:'20px', width:'1000px'}}>
         <Routes>
           <Route exact path='/homepage' element={<HomePage/>}/>
-          <Route path='/detail/:id' element={<AssetDetail/>}/>
+          <Route path='/detail/:userAssetId' element={<AssetDetail/>}/>
           <Route path='/market' element={<MarketTable/>}/>
         </Routes>
+      </div>
       </BrowserRouter>
     );
 

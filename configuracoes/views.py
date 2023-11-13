@@ -1,14 +1,15 @@
-from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render,redirect, get_object_or_404
+from django.http import HttpResponse
+from django.db.models import F
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from django.views.decorators.csrf import csrf_exempt
-from .models import Users, Assets, UserAssets
-from .serializers import AssetSerializer, UserSerializer, UserAssetSerializer, SaveUserAssetSerializer
-from alpha_vantage.timeseries import TimeSeries
-API_KEY='2LJGVYXM980N4VLE'
-ts = TimeSeries(key=API_KEY)
+
+from .models import Users, Assets, UserAssets, AssetPrices
+from .serializers import AssetSerializer, UserAssetSerializer, SaveUserAssetSerializer, AssetPriceSerializer
+
 
 @api_view(['GET'])
 def list_assets(request):
@@ -27,10 +28,12 @@ def market_assets(request):
 
 @api_view(['GET'])
 def asset_details(request,id):
-
-    query = UserAssets.objects.filter(id=id).select_related('asset')
-    userasset = UserAssetSerializer(query, many = True)
-    print(userasset.data)
+    querya = Assets.objects.filter(userassets__id=id).first()
+    asset = AssetSerializer(querya)
+    print(asset.data)
+    
+    query = AssetPrices.objects.filter(asset_id=asset.data['id']).select_related('asset').order_by('-created_at')
+    userasset = AssetPriceSerializer(query, many=True)  
     
     return Response(userasset.data, status=status.HTTP_200_OK)
 
@@ -52,7 +55,7 @@ def login(request):
         user_password = request.POST.get('password',None)
 
         query_user = Users.objects.filter(email=user_email)
-        user = UserAssetSerializer(query_user)
+        user = AssetPriceSerializer(query_user)
         print(user.data)
         return redirect('login')
 

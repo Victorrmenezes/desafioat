@@ -25,7 +25,13 @@ class SaveUserAssetSerializer(serializers.ModelSerializer):
         model= UserAssets
         fields = ['asset','user','low_tunnel','top_tunnel','refresh_time']
 
+class SaveAssetPriceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssetPrices
+        fields = ['id','asset','price']
+
 class AssetPriceSerializer(serializers.ModelSerializer):
     class Meta:
         model = AssetPrices
-        fields = ['id','asset_id','price']
+        fields = ['id','asset','price','created_at']
+    asset = AssetSerializer()
