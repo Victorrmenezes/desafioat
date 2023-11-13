@@ -31,6 +31,10 @@ def schedule_api(item):
 
     last_price = tk.history(period='1d')['close'].values[0]
     
+    if not(item.low_tunnel):
+        item.low_tunnel=0
+    if not(item.top_tunnel):
+        item.top_tunnel=1000
 
     if last_price < item.low_tunnel:
         send_email(item,'compra',last_price)

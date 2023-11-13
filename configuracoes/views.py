@@ -5,6 +5,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+from apscheduler.schedulers.background import BackgroundScheduler
+
 from .models import Users, Assets, UserAssets, AssetPrices
 from .serializers import AssetSerializer, UserAssetSerializer, SaveUserAssetSerializer, AssetPriceSerializer
 from .scheduler import schedule_api
@@ -45,8 +47,9 @@ def add_asset(request):
         query = UserAssets.objects.filter(asset=request.data['id']).first()
         
         schedule_api(query)
-        
-
+        scheduler = BackgroundScheduler()
+        scheduler.add_job( lambda q=query:   schedule_api(q), 'interval', minutes=query.refresh_time , max_instances=1)
+        scheduler.start()
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     else:
         return Response(status.HTTP_400_BAD_REQUEST)
