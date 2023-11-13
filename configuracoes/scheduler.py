@@ -14,15 +14,15 @@ def send_email(item,msg,price):
                 O ativo {item.asset.code} que você está monitorando está em posição de {msg} com a cotação de:
                 R$ {price:.2f}
                 """
-    # try:
-    #     send_mail(
-    #         'Alteração em ativo monitorado',
-    #         message,
-    #         'victorrmenezes9@gmail.com',
-    #         ['victorrmenezes9@gmail.com'],
-    #     )
-    # except Exception as e:
-    #     print(e)
+    try:
+        send_mail(
+            'Alteração em ativo monitorado',
+            message,
+            'victorrmenezes9@gmail.com',
+            ['victorrmenezes9@gmail.com'],
+        )
+    except Exception as e:
+        print(e)
 
 
 def schedule_api(item):
@@ -47,8 +47,7 @@ def schedule_api(item):
     serializer = SaveAssetPriceSerializer(data=new_price)
 
     if serializer.is_valid():
-        pass
-        # serializer.save()
+        serializer.save()
     else:
         print(serializer.errors)
 

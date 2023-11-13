@@ -45,7 +45,16 @@ class MarketTable extends Component {
                         <td>{row.name}</td>
                         <td><input type='number' onChange={(e) => row.low_tunnel=parseFloat(e.target.value)}></input></td>
                         <td><input type='number' onChange={(e) => row.top_tunnel=parseFloat(e.target.value)}></input></td>
-                        <td><input type='number' onChange={(e) => row.refresh_time=parseInt(e.target.value)}></input></td>
+                        <td><select onChange={(e) => row.refresh_time=parseInt(e.target.value)}>
+                            <option value={1} >1</option>
+                            <option value={2} >2</option>
+                            <option value={5} >5</option>
+                            <option value={10} >10</option>
+                            <option value={15} >15</option>
+                            <option value={30} >30</option>
+                            <option value={60} >60</option>
+                            </select></td>
+                        {/* <td><input type='number' onChange={(e) => row.refresh_time=parseInt(e.target.value)}></input></td> */}
                         <td><button onClick={() => {this.handleAdd(row)}}>Adicionar</button></td>
                     </tr>
 

@@ -31,22 +31,26 @@ function AssetDetail(){
         
         <h3 style={{margin:'15px'}}>{ assetCode} - {assetName}</h3>
       </div>
-      <table className="table table-striped">
-        <thead >
-          <tr>
-            <th>Hora</th>
-            <th>Preço</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(detail.data) && detail.data.map( (row) => (
-            <tr key={row.id}>
-              <td>{row.created_at}</td>  
-              <td>{row.price}</td>  
+      <div style={{maxHeight:'450px',overflow:'scroll' }}>
+        <table className="table table-striped">
+          <thead >
+            <tr>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Preço</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {Array.isArray(detail.data) && detail.data.map( (row) => (
+              <tr key={row.id}>
+                <td>{new Date(row.created_at).getDate()}/{new Date(row.created_at).getMonth()+1}/{new Date(row.created_at).getFullYear()+1}</td>  
+                <td>{new Date(row.created_at).getHours().toString().padStart(2,'0')}:{new Date(row.created_at).getMinutes().toString().padStart(2,'0')}</td>  
+                <td>R$ {row.price}</td>  
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
     </div>
   )

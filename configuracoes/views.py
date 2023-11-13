@@ -7,7 +7,7 @@ from rest_framework import status
 
 from .models import Users, Assets, UserAssets, AssetPrices
 from .serializers import AssetSerializer, UserAssetSerializer, SaveUserAssetSerializer, AssetPriceSerializer
-
+from .scheduler import schedule_api
 
 @api_view(['GET'])
 def list_assets(request):
@@ -40,6 +40,13 @@ def add_asset(request):
         serializer = SaveUserAssetSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+
+
+        query = UserAssets.objects.filter(asset=request.data['id']).first()
+        
+        schedule_api(query)
+        
+
         return Response(serializer.data,status=status.HTTP_201_CREATED)
     else:
         return Response(status.HTTP_400_BAD_REQUEST)
