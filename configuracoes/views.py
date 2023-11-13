@@ -30,7 +30,6 @@ def market_assets(request):
 def asset_details(request,id):
     querya = Assets.objects.filter(userassets__id=id).first()
     asset = AssetSerializer(querya)
-    print(asset.data)
     
     query = AssetPrices.objects.filter(asset_id=asset.data['id']).select_related('asset').order_by('-created_at')
     userasset = AssetPriceSerializer(query, many=True)  
