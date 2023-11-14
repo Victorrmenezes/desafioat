@@ -12,12 +12,13 @@ def send_email(item,msg,price):
                 O ativo {item.asset.code} que você está monitorando está em posição de {msg} com a cotação de:
                 R$ {price:.2f}
                 """
+    print(item.user.email)
     try:
         send_mail(
             'Alteração em ativo monitorado',
             message,
             'victorrmenezes9@gmail.com',
-            ['victorrmenezes9@gmail.com'],
+            [item.user.email],
         )
     except Exception as e:
         print(e)
@@ -56,7 +57,7 @@ def schedule_api(item):
 def start():
     scheduler = BackgroundScheduler()
     
-    query = UserAssets.objects.all()
+    query = UserAssets.objects.select_related('user').all()
 
     for q in query:
         scheduler.add_job( lambda q=q:   schedule_api(q), 'interval', minutes=q.refresh_time , max_instances=1)
