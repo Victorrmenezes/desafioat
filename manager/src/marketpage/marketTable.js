@@ -35,7 +35,7 @@ class MarketTable extends Component {
                               <th>Low Tunnel</th>
                               <th>Top Tunnel</th>
                               <th>Monitoramento (min)</th>
-                              <th>Adicionar</th>
+                              <th></th>
                           </tr>
                       </thead>
                       <tbody>
@@ -55,7 +55,7 @@ class MarketTable extends Component {
                             <option value={60} >60</option>
                             </select></td>
                         {/* <td><input type='number' onChange={(e) => row.refresh_time=parseInt(e.target.value)}></input></td> */}
-                        <td><button onClick={() => {this.handleAdd(row)}}>Adicionar</button></td>
+                        <td><button className='btn btn-primary' onClick={() => {this.handleAdd(row)}}>Adicionar</button></td>
                     </tr>
 
                 ) )}

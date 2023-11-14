@@ -44,8 +44,8 @@ class MyTable extends Component {
                         <td>{row.low_tunnel}</td>
                         <td>{row.top_tunnel}</td>
                         <td>{row.refresh_time}</td>
-                        <td><Link to={`/detail/${row.id}`}><button>Detalhes</button></Link></td>
-                        <td><button onClick={() => this.handleDelete(row)}>Excluir</button></td>
+                        <td><Link to={`/detail/${row.id}`}><button className='btn btn-secondary'>Detalhes</button></Link></td>
+                        <td><button className='btn btn-danger' onClick={() => this.handleDelete(row)}>Excluir</button></td>
                     </tr>
 
                 ) )}
