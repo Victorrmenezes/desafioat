@@ -1,5 +1,4 @@
-import React, { Component,useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
 import MyTable from './my_table';
 
 function HomePage() {

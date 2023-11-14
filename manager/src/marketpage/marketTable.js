@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios, { HttpStatusCode } from 'axios'
+import axios from 'axios'
 import backendUrl from "../Config";
-import { Link } from 'react-router-dom';
+
 
 class MarketTable extends Component {
     state = { 

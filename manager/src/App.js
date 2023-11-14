@@ -6,7 +6,6 @@ import AssetDetail from './homepage/asset_detail';
 import HomePage from './homepage/homepage';
 import NavBar from './components/navBar';
 import MarketTable from './marketpage/marketTable';
-import Login from './Login';
 
 function App() {
     return (

@@ -1,5 +1,3 @@
-import time
-from datetime import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
 from yahooquery import Ticker
 from django.core.mail import send_mail

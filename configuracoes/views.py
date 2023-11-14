@@ -1,5 +1,4 @@
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render,redirect
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -7,7 +6,7 @@ from rest_framework import status
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from .models import Users, Assets, UserAssets, AssetPrices
+from .models import  Assets, UserAssets, AssetPrices
 from .serializers import AssetSerializer, UserAssetSerializer, SaveUserAssetSerializer, AssetPriceSerializer
 from .scheduler import schedule_api
 
